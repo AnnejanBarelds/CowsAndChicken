@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>CowsAndChicken.DomainModel</AssemblyName>
+    <RootNamespace>CowsAndChicken.DomainModel</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="4.5.1" />
+  </ItemGroup>
+
+</Project>
