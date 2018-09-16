@@ -12,8 +12,8 @@ namespace CowsAndChicken.DomainModel.Tests
         {
             var player = new Player("Annejan", 35);
 
-            Assert.Empty(player.Efficiency.Stats);
-            Assert.Null(player.Speed.Stats);
+            Assert.Empty(player.GetStatistics<PlayerEfficiencyStats>().Stats);
+            Assert.Null(player.GetStatistics<PlayerSpeedStats>().Stats);
         }
 
         [Fact]
@@ -26,10 +26,13 @@ namespace CowsAndChicken.DomainModel.Tests
 
             player.TakeTurn(1234);
 
-            Assert.NotEmpty(player.Efficiency.Stats);
-            Assert.Single(player.Efficiency.Stats);
-            Assert.NotNull(player.Efficiency.Stats[4]);
-            Assert.NotNull(player.Speed.Stats);
+            var efficiency = player.GetStatistics<PlayerEfficiencyStats>();
+            var speed = player.GetStatistics<PlayerSpeedStats>();
+
+            Assert.NotEmpty(efficiency.Stats);
+            Assert.Single(efficiency.Stats);
+            Assert.NotNull(efficiency.Stats[4]);
+            Assert.NotNull(speed.Stats);
         }
 
         [Fact]
@@ -40,16 +43,20 @@ namespace CowsAndChicken.DomainModel.Tests
             generator.Setup(g => g.Generate(It.Is<int>(i => i == 4))).Returns(() => 1234);
             player.StartGame(4, generator.Object);
             player.TakeTurn(1234);
-            var avg = player.Efficiency.Stats[4].Average;
-            var savg = player.Speed.Stats.Average;
+
+            var efficiency = player.GetStatistics<PlayerEfficiencyStats>();
+            var speed = player.GetStatistics<PlayerSpeedStats>();
+
+            var avg = efficiency.Stats[4].Average;
+            var savg = speed.Stats.Average;
 
             player.StartGame(4, generator.Object);
             player.TakeTurn(1233);
             Thread.Sleep(200);
             player.TakeTurn(1234);
 
-            Assert.NotEqual(avg, player.Efficiency.Stats[4].Average);
-            Assert.NotEqual(avg, player.Speed.Stats.Average);
+            Assert.NotEqual(avg, efficiency.Stats[4].Average);
+            Assert.NotEqual(avg, speed.Stats.Average);
         }
 
         [Fact]
@@ -64,8 +71,11 @@ namespace CowsAndChicken.DomainModel.Tests
             player.StartGame(5, generator.Object);
             player.TakeTurn(12345);
 
-            Assert.NotNull(player.Efficiency.Stats[4]);
-            Assert.NotNull(player.Efficiency.Stats[5]);
+            var efficiency = player.GetStatistics<PlayerEfficiencyStats>();
+            var speed = player.GetStatistics<PlayerSpeedStats>();
+
+            Assert.NotNull(efficiency.Stats[4]);
+            Assert.NotNull(efficiency.Stats[5]);
         }
     }
 }

@@ -79,7 +79,7 @@ namespace CowsAndChicken.ApplicationServices
             var player = await GetPlayerAsync(playerId);
             var stats = new Dictionary<int, DTO.Stats>();
 
-            foreach (var item in player.Efficiency.Stats)
+            foreach (var item in player.GetStatistics<PlayerEfficiencyStats>().Stats)
             {
                 stats[item.Key] = new DTO.Stats
                 {
@@ -97,13 +97,14 @@ namespace CowsAndChicken.ApplicationServices
         public async Task<DTO.Stats> GetSpeedStatsAsync(Guid playerId)
         {
             var player = await GetPlayerAsync(playerId);
+            var stats = player.GetStatistics<PlayerSpeedStats>().Stats;
             return new DTO.Stats
             {
-                Average = player.Speed.Stats.Average,
-                Max = player.Speed.Stats.Max,
-                Mean = player.Speed.Stats.Mean,
-                Median = player.Speed.Stats.Median,
-                Min = player.Speed.Stats.Min
+                Average = stats.Average,
+                Max = stats.Max,
+                Mean = stats.Mean,
+                Median = stats.Median,
+                Min = stats.Min
             };
         }
 

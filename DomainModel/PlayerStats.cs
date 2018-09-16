@@ -7,15 +7,21 @@ namespace CowsAndChicken.DomainModel
 {
     public abstract class PlayerStats
     {
-        private readonly Player _player;
+        private Player _player;
 
         protected IEnumerable<Game> CompletedGames => _player.Games.Where(game => game.Status == GameStatus.Completed);
 
-        public PlayerStats(Player player)
+        public void Init(Player player)
         {
             _player = player;
             player.GameStarted += (p, gsea) => gsea.Game.GameCompleted += (g, ea) => HandleGameCompleted(g as Game);
+            if (CompletedGames.Any())
+            {
+                Init();
+            }
         }
+
+        protected virtual void Init() { }
 
         protected abstract void HandleGameCompleted(Game game);
     }

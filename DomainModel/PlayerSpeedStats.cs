@@ -7,12 +7,9 @@ namespace CowsAndChicken.DomainModel
     {
         public Stats Stats { get; private set; }
 
-        public PlayerSpeedStats(Player player) : base(player)
+        protected override void Init()
         {
-            if (player.Games.Any())
-            {
-                CalculateStats();
-            }
+            CalculateStats();
         }
 
         protected override void HandleGameCompleted(Game game)

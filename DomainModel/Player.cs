@@ -7,8 +7,7 @@ namespace CowsAndChicken.DomainModel
     public class Player
     {
         private readonly List<Game> _games = new List<Game>();
-        private PlayerEfficiencyStats _efficiency;
-        private PlayerSpeedStats _speed;
+        private readonly Dictionary<Type, PlayerStats> _stats = new Dictionary<Type, PlayerStats>();
 
         private Game CurrentGame
         {
@@ -23,30 +22,6 @@ namespace CowsAndChicken.DomainModel
         public string Name { get; private set; }
 
         public int Age { get; private set; }
-
-        public PlayerEfficiencyStats Efficiency
-        {
-            get
-            {
-                if (_efficiency == null)
-                {
-                    _efficiency = new PlayerEfficiencyStats(this);
-                }
-                return _efficiency;
-            }
-        }
-
-        public PlayerSpeedStats Speed
-        {
-            get
-            {
-                if (_speed == null)
-                {
-                    _speed = new PlayerSpeedStats(this);
-                }
-                return _speed;
-            }
-        }
 
         public event EventHandler<GameStartedEventArgs> GameStarted;
 
@@ -106,6 +81,17 @@ namespace CowsAndChicken.DomainModel
             }
             
             return CurrentGame.ProcessTurn(guess);
+        }
+
+        public T GetStatistics<T>() where T: PlayerStats, new()
+        {
+            if (!_stats.ContainsKey(typeof(T)))
+            {
+                var stat = new T();
+                stat.Init(this);
+                _stats[typeof(T)] = stat;
+            }
+            return _stats[typeof(T)] as T;
         }
     }
 }

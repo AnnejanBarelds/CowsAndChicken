@@ -21,8 +21,6 @@ namespace CowsAndChicken.Infrastructure
             modelBuilder.Entity<Player>().HasKey(p => p.Id);
             modelBuilder.Entity<Player>().Metadata.FindNavigation(nameof(Player.Games)).SetPropertyAccessMode(PropertyAccessMode.Field);
             modelBuilder.Entity<Player>().HasMany(p => p.Games).WithOne().IsRequired();
-            modelBuilder.Entity<Player>().Ignore(p => p.Efficiency);
-            modelBuilder.Entity<Player>().Ignore(p => p.Speed);
             modelBuilder.Entity<Player>().Ignore(p => p.YearOfBirth);
 
             modelBuilder.Entity<Game>().HasKey(g => g.Id);

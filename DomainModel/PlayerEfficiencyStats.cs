@@ -9,15 +9,7 @@ namespace CowsAndChicken.DomainModel
 
         public Dictionary<int, Stats> Stats => new Dictionary<int, Stats>(_stats); // Returning a copy of the list to prevent fiddling from outside the Entity with the actual dictionary
 
-        public PlayerEfficiencyStats(Player player) :base(player)
-        {
-            if (player.Games.Any())
-            {
-                Init();
-            }
-        }
-
-        private void Init()
+        protected override void Init()
         {
             var groups = CompletedGames.GroupBy(g => g.NrOfDigits);
             foreach (var group in groups)
