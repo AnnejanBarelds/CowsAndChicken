@@ -73,7 +73,7 @@ namespace CowsAndChicken.DomainModel.Tests
 
             generator.Verify();
             Assert.Equal(3, result.NrOfCows);
-            Assert.Equal(1, result.NrOfChicken);
+            Assert.Equal(1, result.NrOfChickens);
         }
     }
 }

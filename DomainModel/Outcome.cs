@@ -8,24 +8,24 @@ namespace CowsAndChicken.DomainModel
     {
         public int NrOfCows { get; private set; }
 
-        public int NrOfChicken { get; private set; }
+        public int NrOfChickens { get; private set; }
 
         public bool IsGameCompleted { get; private set; }
 
-        public Outcome(int nrOfCows, int nrOfChicken, bool isGameCompleted)
+        public Outcome(int nrOfCows, int nrOfChickens, bool isGameCompleted)
         {
             if (nrOfCows < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(nrOfCows), "Value cannot be a negative number");
             }
 
-            if (nrOfChicken < 0)
+            if (nrOfChickens < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(nrOfChicken), "Value cannot be a negative number");
+                throw new ArgumentOutOfRangeException(nameof(nrOfChickens), "Value cannot be a negative number");
             }
 
             NrOfCows = nrOfCows;
-            NrOfChicken = nrOfChicken;
+            NrOfChickens = nrOfChickens;
             IsGameCompleted = isGameCompleted;
         }
     }

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Take turn";
+}
+
+<h1>@ViewData["GameInfo"]</h1>
+<h2>Take turn</h2>
+
+<form asp-controller="Home" asp-action="TakeTurnAsync" method="post">
+    @if (ViewData["Hint"] != null)
+    {
+    <p>Hint: @ViewData["Hint"]</p>
+    }
+    <p>Your guess: <input type="text" id="guess" name="guess"></p>
+    <p><input type="submit" id="Submit"></p>
+</form>

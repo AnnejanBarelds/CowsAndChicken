@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h3>Register player</h3>
+
+<form asp-controller="Home" asp-action="RegisterAsync" method="post">
+    <p>Name: <input type="text" id="name" name="name"></p>
+    <p>Age: <input type="text" id="age" name="age"></p>
+    <p><input type="submit" id="Submit"></p>
+</form>

@@ -1,0 +1,58 @@
+﻿@model WebApp.Models.StatsViewModel
+
+@{
+    ViewData["Title"] = "Game stats";
+}
+
+<h2>Game stats</h2>
+<p>Efficiency statistics (# of guesses needed, grouped per digit count):</p>
+<p>
+    <table>
+        <tr>
+            <td>Nr. of digits</td>
+            <td>Average # guesses</td>
+            <td>Mean # guesses</td>
+            <td>Median # guesses</td>
+            <td>Max # guesses</td>
+            <td>Min # guesses</td>
+        </tr>
+        @foreach (var pair in Model.EfficiencyStats)
+        {
+            <tr>
+                <td>@pair.Key</td>
+                <td>@pair.Value.Average</td>
+                <td>@pair.Value.Mean</td>
+                <td>@pair.Value.Median</td>
+                <td>@pair.Value.Min</td>
+                <td>@pair.Value.Max</td>
+            </tr>
+        }
+    </table>
+</p>
+<p>Speed statistics (time between guesses in milliseconds):</p>
+<p>
+    <table>
+        <tr>
+            <td>Average guess time:</td>
+            <td>@Model.SpeedStats.Average</td>
+        </tr>
+        <tr>
+            <td>Mean guess time:</td>
+            <td>@Model.SpeedStats.Mean</td>
+        </tr>
+        <tr>
+            <td>Median guess time:</td>
+            <td>@Model.SpeedStats.Median</td>
+        </tr>
+        <tr>
+            <td>Minimum guess time:</td>
+            <td>@Model.SpeedStats.Min</td>
+        </tr>
+        <tr>
+            <td>Maximum guess time:</td>
+            <td>@Model.SpeedStats.Max</td>
+        </tr>
+    </table>
+</p>
+
+<a asp-action="NewGame" asp-controller="Home">Start new game?</a>

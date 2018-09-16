@@ -24,7 +24,7 @@ namespace CowsAndChicken.DomainModel
         public Outcome Process(int[] numberToGuess)
         {
             int cows = 0;
-            int chicken = 0;
+            int chickens = 0;
             bool correct = true;
 
             for (int i = 0; i < Guess.Length; i++)
@@ -38,12 +38,12 @@ namespace CowsAndChicken.DomainModel
                     correct = false;
                     if (numberToGuess.Contains(Guess[i]))
                     {
-                        chicken++;
+                        chickens++;
                     }
                 }
             }
 
-            Outcome = new Outcome(cows, chicken, correct);
+            Outcome = new Outcome(cows, chickens, correct);
             return Outcome;
         }
     }

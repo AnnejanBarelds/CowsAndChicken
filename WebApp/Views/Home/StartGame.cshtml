@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Start Game";
+}
+
+<h2>Start Game</h2>
+
+<form asp-controller="Home" asp-action="StartAsync" method="post">
+    <p>Nr of digits to guess: <input type="text" id="nrOfDigits" name="nrOfDigits"></p>
+    <p><input type="submit" id="Submit"></p>
+</form>
+

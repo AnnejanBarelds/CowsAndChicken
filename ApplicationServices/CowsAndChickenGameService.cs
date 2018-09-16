@@ -68,7 +68,7 @@ namespace CowsAndChicken.ApplicationServices
             // TODO: Use Automapper
             return new Result
             {
-                NrOfChicken = outcome.NrOfChicken,
+                NrOfChickens = outcome.NrOfChickens,
                 NrOfCows = outcome.NrOfCows,
                 IsGameCompleted = outcome.IsGameCompleted
             };

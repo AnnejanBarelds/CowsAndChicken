@@ -8,7 +8,7 @@ namespace CowsAndChicken.DTO
     {
         public int NrOfCows { get; set; }
 
-        public int NrOfChicken { get; set; }
+        public int NrOfChickens { get; set; }
 
         public bool IsGameCompleted { get; set; }
     }
